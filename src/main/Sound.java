@@ -1,9 +1,6 @@
 package main;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
 import java.net.URL;
 
 public class Sound {
@@ -36,5 +33,12 @@ public class Sound {
 
     public void stop(){
         clip.stop();
+    }
+
+    public void setVolume(float volume){
+        if(clip != null && clip.isOpen()){
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(volume);
+        }
     }
 }

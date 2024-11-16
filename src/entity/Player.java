@@ -14,6 +14,8 @@ public class Player extends Entity{
     KeyHandler keyH;
     public int hasRedMinion = 0;
     public int hasBlueMinion = 0;
+    public int hasBoot = 0;
+    public int destroyedTurretsCounter = 0;
 
     public final int screenX, screenY;
 
@@ -105,34 +107,54 @@ public class Player extends Entity{
 
             switch (objectName){
                 case "RedCaster", "RedMelee":
-                    gp.playSE(0);
+                    gp.playSE(0, 2.0f);
                     hasRedMinion++;
                     gp.obj[i] = null;
-                    System.out.println("Red Minion " + hasRedMinion);
+                    gp.ui.showMessage("You Killed a Red Minion!");
                     break;
                 case "BlueMelee", "BlueCaster":
-                    gp.playSE(0);
+                    gp.playSE(0, 2.0f);
                     hasBlueMinion++;
                     gp.obj[i] = null;
-                    System.out.println("Blue Minion " + hasBlueMinion);
+                    gp.ui.showMessage("You Killed a Blue Minion!");
                     break;
                 case "RedTowerCrystal":
-                    gp.playSE(1);
                     if(hasRedMinion >= 2){
+                        destroyedTurretsCounter++;
+                        gp.playSE(1, 2.0f);
                         gp.obj[i] = null;
+                        gp.ui.showMessage("You destroyed a Tower Piece!");
                         hasRedMinion -= 2;
+                    } else{
+                        gp.ui.showMessage("You need to kill 2 Red Minions!");
+                    }
+                    if(destroyedTurretsCounter == 24){
+                        gp.ui.gameFinished = true;
+                        gp.stopMusic();
 
-                        System.out.println(hasRedMinion);
                     }
                     break;
                 case "BlueTowerCrystal":
-                    gp.playSE(1);
                     if(hasBlueMinion >= 2){
+                        destroyedTurretsCounter++;
+                        gp.playSE(1, 2.0f);
                         gp.obj[i] = null;
+                        gp.ui.showMessage("You destroyed a Tower Piece!");
                         hasBlueMinion -= 2;
-
-                        System.out.println(hasBlueMinion);
+                    } else{
+                        gp.ui.showMessage("You need to kill 2 Blue Minions!");
                     }
+                    if(destroyedTurretsCounter == 24){
+                        gp.ui.gameFinished = true;
+                        gp.stopMusic();
+
+                    }
+                    break;
+                case "Boot":
+                    hasBoot++;
+                    speed += 3;
+                    gp.ui.showMessage("You collected boots!");
+                    gp.obj[i] = null;
                     break;
             }
         }

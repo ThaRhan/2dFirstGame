@@ -204,7 +204,7 @@ public class AssetSetter {
         gp.obj[35].worldY = 18 * gp.tileSize;
 
         gp.obj[36] = new OBJ_BlueTowerCrystal();
-        gp.obj[36].worldX = 1 * gp.tileSize;
+        gp.obj[36].worldX = gp.tileSize;
         gp.obj[36].worldY = 30 * gp.tileSize;
 
         gp.obj[37] = new OBJ_BlueTowerCrystal();
@@ -298,5 +298,10 @@ public class AssetSetter {
         gp.obj[71] = new OBJ_BlueCaster();
         gp.obj[71].worldX = 45 * gp.tileSize;
         gp.obj[71].worldY = 38 * gp.tileSize;
+
+        gp.obj[72] = new OBJ_Boot();
+        gp.obj[72].worldX = 14 * gp.tileSize;
+        gp.obj[72].worldY = 33 * gp.tileSize;
+
     }
 }

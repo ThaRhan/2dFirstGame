@@ -19,8 +19,6 @@ public class GamePanel extends JPanel implements Runnable{
     // WORLD SETTINGS
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    public final int worldWidth = tileSize + maxWorldCol;
-    public final int worldHeight = tileSize + maxWorldRow;
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
@@ -45,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void setupGame(){
         aSetter.setObject();
-        //playMusic(2);
+        playMusic(2, -20.0f);
     }
 
     public void startGameThread(){
@@ -104,8 +102,9 @@ public class GamePanel extends JPanel implements Runnable{
         g2.dispose();
     }
 
-    public void playMusic(int i){
+    public void playMusic(int i, float volume){
         sound.setFile(i);
+        sound.setVolume(volume);
         sound.play();
         sound.loop();
     }
@@ -114,8 +113,9 @@ public class GamePanel extends JPanel implements Runnable{
         sound.stop();
     }
 
-    public void playSE(int i){
+    public void playSE(int i, float volume){
         se.setFile(i);
+        se.setVolume(volume);
         se.play();
     }
 }
